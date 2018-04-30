@@ -1,17 +1,13 @@
 import React from 'react';
 import { render } from 'react-dom';
-import Hello from './Hello';
-import Button from './components/Button';
+import { App } from './App';
 
-class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <Hello hello={'Hello, world! And the people of the world!'} />
-        <Button />
-      </div>
-    );
-  }
+const container = document.getElementById('app');
+render(<App />, container);
+
+if (module.hot) {
+  module.hot.accept('./App', function() {
+    const NewApp = require('./App').App;
+    render(<NewApp />, container);
+  });
 }
-
-render(<App />, document.getElementById('app'));
